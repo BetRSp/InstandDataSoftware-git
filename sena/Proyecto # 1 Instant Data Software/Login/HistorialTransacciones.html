@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Transacciones</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+           
+        }
+        
+        th, td {
+            padding: 25px;
+            text-align: center;
+            border: 3px solid #ddd;
+            font-family: Arial, sans-serif;
+        }
+        th {
+            background-color: #1a73e8;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Historial de Transacciones</h1>
+    <table id="historialTransacciones">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Monto</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se cargarán dinámicamente aquí -->
+        </tbody>
+    </table>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    // Simulación de datos del servidor (Esto sería reemplazado por un llamado real a una API)
+    const transacciones = [
+        { fecha: "2024-12-01", hora: "14:35", monto: "$50.000", estado: "Completado" },
+        { fecha: "2024-12-02", hora: "11:20", monto: "$25.000", estado: "Pendiente" },
+        { fecha: "2024-12-03", hora: "09:15", monto: "$100.000", estado: "Completado" },
+    ];
+
+    // Cargar las transacciones en la tabla
+    const tablaBody = document.getElementById("historialTransacciones").querySelector("tbody");
+    transacciones.forEach((transaccion) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <td>${transaccion.fecha}</td>
+            <td>${transaccion.hora}</td>
+            <td>${transaccion.monto}</td>
+            <td>${transaccion.estado}</td>
+        `;
+        tablaBody.appendChild(fila);
+    });
+});
+  
+    </script>
+</body>
+</html>

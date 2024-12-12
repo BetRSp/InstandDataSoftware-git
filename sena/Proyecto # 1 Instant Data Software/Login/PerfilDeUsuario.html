@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario - Plataforma de Apuestas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+        }
+        .imaglogo {
+width: 218px;
+height: 130px;
+margin: -72px 792px;
+margin-bottom: -10px;
+margin-right: -32px;
+}
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Encabezado de Perfil -->
+        <header class="gradient-bg text-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden mr-6">
+                    <img src="imagesperfil/perfil.jpg" alt="Foto de perfil" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold">Alberto Sparano Manzano</h1>
+                    <p class="text-sm opacity-80">@albertosparano04</p>
+                    <div class="flex items-center mt-2">
+                        <span class="bg-green-500 text-white text-xs px-2 py-1 rounded mr-2">Verificado</span>
+                        <span class="bg-yellow-500 text-white text-xs px-2 py-1 rounded">Nivel 3</span>
+                        <img src="imagesperfil/logoIDS.png" alt="logo" class="imaglogo">
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Contenedor Principal -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Columna Izquierda: Información Personal y Cuenta -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Información Personal</h2>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Correo Electrónico</label>
+                            <p>albertosparano04@gmail.com</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Teléfono</label>
+                            <p>+57 315-316 0456</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600">Fecha de Registro</label>
+                            <p>15 de Mayo, 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saldo y Transacciones -->
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Saldo</h2>
+                        <button class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600" onclick="redirigirRecarga()">
+                            <i class="fas fa-plus mr-2"></i>Recargar
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-bold text-green-600">$45,230.50</p>
+                        <a href="javascript:void(0)" class="text-sm text-blue-500 mt-2 inline-block" onclick="redirigirHistorialTransaccion()">
+                            Ver historial de transacciones
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Central: Historial de Apuestas y Estadísticas -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Historial de Apuestas</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between border-b pb-2">
+                            <div>
+                                <p class="font-medium">Lotería de Cundinamarca</p>
+                                <p class="text-sm text-gray-500">12 de Noviembre, 2024</p>
+                            </div>
+                            <span class="text-red-500">-$500</span>
+                        </div>
+                        <div class="flex justify-between border-b pb-2">
+                            <div>
+                                <p class="font-medium">Loteria del Tolima</p>
+                                <p class="text-sm text-gray-500">10 de Noviembre, 2024</p>
+                            </div>
+                            <span class="text-green-500">+$2,000</span>
+                        </div>
+                        <a href="ResultadoDeApuestas.html#historial" class="text-blue-500 text-sm">Ver historial completo</a>
+
+                    </div>
+                </div>
+
+                <!-- Estadísticas y Logros -->
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Estadísticas</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-600">Total Apostado</p>
+                            <p class="font-bold">$120,450</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Ganado</p>
+                            <p class="text-green-600 font-bold">$85,230</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">% de Éxito</p>
+                            <p class="font-bold">42.5%</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Apuestas</p>
+                            <p class="font-bold">156</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Configuraciones y Enlaces -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Configuraciones</h2>
+                    <div class="space-y-4">
+                        <!-- Configuración de notificaciones -->
+                        <div>
+                            <label class="flex items-center justify-between">
+                                <span>Notificaciones por Email</span>
+                                <input type="checkbox" id="emailNotifications" class="form-checkbox" checked>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="flex items-center justify-between">
+                                <span>Notificaciones por SMS</span>
+                                <input type="checkbox" id="smsNotifications" class="form-checkbox">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Cambio de Contraseña</h2>
+                    <form id="changePasswordForm" class="space-y-4" onsubmit="return handlePasswordChange(event)">
+                        <div>
+                            <label for="currentPassword" class="block text-sm font-medium text-gray-700">Contraseña Actual</label>
+                            <input type="password" id="currentPassword" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                        </div>
+                        <div>
+                            <label for="newPassword" class="block text-sm font-medium text-gray-700">Nueva Contraseña</label>
+                            <input type="password" id="newPassword" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                        </div>
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
+                            <input type="password" id="confirmPassword" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                        </div>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                            Cambiar Contraseña
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <button class="bg-blue-500 text-white px-7 py-2 rounded-md hover:bg-blue-600" id="changeLanguageBtn">Cambiar Idioma</button>
+
+                <br><br>
+                <select id="languageSelect" class="w-full p-2 border rounded">
+                    <option value="es">Español (Colombia)</option>
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                </select>
+            
+            </div>
+                    
+                <!-- Insignias y Logros -->
+                <div class="bg-white card p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Insignias</h2>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">
+                            🏆 Apostador Frecuente
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                            💎 Top 10% del Mes
+                        </div>
+                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                            🌟 3 Meses Consecutivos
+                        </div>
+                    </div>
+                </div>
+
+        <!-- Enlaces Importantes -->
+        <div class="bg-white card p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">Más Opciones</h2>
+            <div class="space-y-3">
+                <a href="TerminosYCondiciones.html" class="block text-blue-500 hover:underline">
+                    <i class="fas fa-book mr-2"></i>Términos y Condiciones
+                </a>
+                <a href="SoportealCliente.html" class="block text-blue-500 hover:underline">
+                    <i class="fas fa-headset mr-2"></i>Soporte al Cliente
+                </a>
+                <a href="#" id="btnCerrarSesion" class="block text-red-500 hover:underline">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function cerrarSesion() {
+            // Eliminar datos de sesión
+            localStorage.removeItem('usuarioActivo');
+            sessionStorage.removeItem('usuarioActivo');
+
+            window.location.href = 'index.html';
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const botonCerrarSesion = document.getElementById('btnCerrarSesion');
+            
+            if (botonCerrarSesion) {
+                botonCerrarSesion.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevenir el comportamiento 
+                    cerrarSesion();
+                });
+            }
+        });
+
+        function redirigirRecarga() {
+            window.location.href = "RecargaSaldo.html"; 
+        }
+
+        function redirigirHistorialTransaccion() {
+            window.location.href = "HistorialTransacciones.html"; 
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+    // Notificaciones
+    const emailCheckbox = document.getElementById('emailNotifications');
+    const smsCheckbox = document.getElementById('smsNotifications');
+
+    emailCheckbox.addEventListener('change', () => {
+        const status = emailCheckbox.checked ? 'activadas' : 'desactivadas';
+        alert(`Notificaciones por Email ${status}`);
+        // activar/desactivar notificaciones por email
+    });
+
+    smsCheckbox.addEventListener('change', () => {
+        const status = smsCheckbox.checked ? 'activadas' : 'desactivadas';
+        alert(`Notificaciones por SMS ${status}`);
+        // activar/desactivar notificaciones por SMS
+    });
+
+    // Cambio de Contraseña
+    window.handlePasswordChange = (event) => {
+        event.preventDefault();
+
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (newPassword !== confirmPassword) {
+            alert('Las contraseñas no coinciden. Por favor, verifica.');
+            return false;
+        }
+
+    
+        console.log('Contraseña cambiada exitosamente');
+        alert('Tu contraseña ha sido cambiada con éxito');
+        return true;
+    };
+});
+//Cambio de idioma
+ 
+const translations = {
+    es: {
+        title: 'Bienvenido',
+        description: 'Seleccione un idioma del menú desplegable para cambiar el idioma de la página.',
+        actionButton: 'Haz clic aquí'
+    },
+    en: {
+        title: 'Welcome',
+        description: 'Select a language from the dropdown menu to change the page language.',
+        actionButton: 'Click here'
+    },
+    pt: {
+        title: 'Bem-vindo',
+        description: 'Selecione um idioma no menu suspenso para alterar o idioma da página.',
+        actionButton: 'Clique aqui'
+    },
+};
+
+// Cambiar idioma dinámicamente al hacer clic en el botón
+document.getElementById('changeLanguageBtn').addEventListener('click', function () {
+    const selectedLanguage = document.getElementById('languageSelect').value;
+    const elementsToTranslate = {
+        title: document.getElementById('title'),
+        description: document.getElementById('description'),
+        actionButton: document.getElementById('actionButton')
+    };
+
+    // Aplicar traducciones
+    for (const key in elementsToTranslate) {
+        elementsToTranslate[key].textContent = translations[selectedLanguage][key];
+    }
+});
+
+    </script>
+    
+</body>
+</html>

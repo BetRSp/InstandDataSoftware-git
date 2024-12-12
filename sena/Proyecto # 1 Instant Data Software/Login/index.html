@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Data Software - Login</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e7e3e3d5;
+            color: #0066cc;
+        }
+        
+        .browser-window {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: rgb(221, 219, 219);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .browser-toolbar {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+    
+        .address-bar {
+            width: 70%;
+            padding: 5px;
+            margin-left: 10px;
+        }
+    
+        .page-content {
+            padding: 1px;
+            background: linear-gradient(135deg, #ffffff, #e6f2ff);
+        }
+    
+        h1 {
+            color: #0066cc;
+            text-align: center;
+        }
+    
+        .login-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1000px;
+        }
+    
+        .hero-image {
+            width: 30%;
+            height: 5%;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .login-form {
+        width: 60%; /* Ajusta el ancho del formulario */
+        max-width: 400px; /* Establece un límite de ancho */
+        padding: 30px; /* Incrementa el relleno interno */
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 0 auto; /* Centra el formulario en su contenedor */
+       
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Incrementa el espacio entre los elementos */
+       
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px; /* Incrementa el espacio entre el label y el campo */
+        font-weight: bold; /* texto negrita*/
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 150%; /* Asegura que los campos ocupen el 100% del ancho */
+        padding: 12px; /* Incrementa el relleno interno */
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px; /* Aumenta el tamaño del texto */
+        box-sizing: border-box;
+    }
+
+    .acceso-btn {
+        background-color: #0066cc;
+        color: white;
+        padding: 12px 20px; /* Incrementa el tamaño del botón */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%; /* Botón de ancho completo */
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .acceso-btn:hover {
+        background-color: #005bb5;
+    }
+
+    .forgot-password {
+        display: block;
+        margin-top: 10px;
+        color: #0066cc;
+        text-decoration: none;
+        font-size: 14px;
+        text-align: left;
+    }
+    
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+    
+        .facebook-btn, .google-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    
+        .facebook-btn {
+            background-color: #3b5998;
+            color: white;
+        }
+    
+        .facebook-btn:hover {
+            background-color: #2d4373;
+        }
+    
+        .google-btn {
+            background-color: #dd4b39;
+            color: white;
+        }
+    
+        .google-btn:hover {
+            background-color: #c23321;
+        }
+        .imaglogo {
+width: 189px;
+height: 117px;
+margin: -90px 821px;
+margin-bottom: -19px;
+margin-right: 73px;
+}
+    </style>
+    
+</head>
+<body>
+    
+        <div class="page-content">
+            <header>
+                <h1>Instant Data Software</h1>
+                <img src="imagesperfil/logoIDS.png" alt="logo" class="imaglogo">
+            </header>
+            <main>
+                <div class="login-container">
+                    <img src="https://www.bupasalud.com.co/sites/default/files/inline-images/intropresion.jpg" alt="Hombre usando smartphone en sofá" class="hero-image">
+                   
+                    <form id="loginForm">
+                        <br>
+                        <label for="usuario">Usuario:</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
+                        <br>
+                        <br>
+                        <label for="contrasena">Contraseña:</label>
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+                        <label>
+                            <input type="checkbox" id="recordar" name="recordar"> Recordar mis datos
+                        </label>
+                        <button type="button" onclick="redirigir()">Iniciar Sesión</button>
+                        <button type="button" onclick="RegistroUsuario()">Registro de Usuario</button>
+                    </form>
+                   
+                </div>
+
+                <div class="social-login">
+                    <p>Inicia sesión con tu cuenta con :</p>
+                    <button type="button" class="google-btn" onclick="loginWithGoogle()">
+                        Google
+                    </button>
+                    <button type="button" class="facebook-btn" onclick="loginWithFacebook()">
+                        Facebook
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+       
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío por defecto del formulario
+
+            // Obtener valores de los campos
+            const usuario = document.getElementById('usuario').value.trim();
+            const contrasena = document.getElementById('contrasena').value.trim();
+            const recordar = document.getElementById('recordar').checked;
+
+            // Validaciones básicas
+            if (!usuario || !contrasena) {
+                alert('Por favor complete todos los campos');
+                return;
+            }
+
+            // Validación personalizada (por ejemplo, longitud mínima de contraseña)
+            if (contrasena.length < 6) {
+                alert('La contraseña debe tener al menos 6 caracteres');
+                return;
+            }
+
+            // Mostrar datos en consola para depuración
+            console.log('Datos del formulario:', {
+                usuario,
+                contrasena,
+                recordar
+            });
+
+            // Simular envío de datos a la API
+            const loginData = { usuario, contrasena, recordar };
+
+            fetch('https://miapi.com/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en el inicio de sesión');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Respuesta de la API:', data);
+                alert('Inicio de sesión exitoso');
+                // Redirigir a otra página o realizar alguna acción adicional
+                // window.location.href = '/dashboard';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un problema al intentar iniciar sesión');
+            });
+        });
+
+        function redirigir() {
+            const usuario = document.getElementById('usuario').value;
+            const contrasena = document.getElementById('contrasena').value;
+
+            // Validación básica: campos vacíos iniciar seccion
+            if (usuario && contrasena) {
+                // Redirige a la página.
+                window.location.href = "PerfilDeUsuario.html";
+            } else {
+                // Muestra una alerta si los campos están vacíos
+                alert("Por favor, complete todos los campos.");
+            }
+        }
+        function RegistroUsuario() {
+            window.location.href = "RegistroDeUsuario.html"; 
+        }
+
+ function loginWithGoogle() {
+            window.location.href = "https://accounts.google.com/signin";
+            console.log('Iniciando sesión con Google...');
+        }
+        
+        function loginWithFacebook() {
+            window.location.href = "https://es-la.facebook.com/login/device-based/regular/login/";
+            console.log('Iniciando sesión con Facebook...');
+        }
+    </script>
+</body>
+</html>

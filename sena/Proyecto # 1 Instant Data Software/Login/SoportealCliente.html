@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte al Cliente</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    .support-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.support-section h2 {
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+.support-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.support-form label {
+    font-weight: bold;
+}
+
+.support-form input,
+.support-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.support-form button {
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.support-form button:hover {
+    background-color: #1557b0;
+}
+
+.contact-options {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.contact-options li {
+    margin: 10px 0;
+}
+
+.contact-options a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.contact-options a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<body>
+    <div class="support-section">
+        <h2>Soporte al Cliente</h2>
+        <p>¿Necesitas ayuda? Nuestro equipo está aquí para asistirte.</p>
+    
+        <!-- Formulario de contacto -->
+        <form id="supportForm" class="support-form" onsubmit="return handleSupportRequest(event)">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" placeholder="Ingresa tu nombre" required>
+            
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
+            
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" placeholder="Describe tu problema o consulta" rows="5" required></textarea>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    
+        <!-- Opciones adicionales -->
+        <p>O comunícate directamente:</p>
+        <ul class="contact-options">
+            <li><strong>Teléfono:</strong> <a href="tel:+573137662865">+57 313 766 2865</a></li>
+            <li><strong>Email:</strong> <a href="mailto:soporte@instantdatasoftware.com">soporte@instantdatasoftware.com</a></li>
+        </ul>
+    </div>
+    
+
+<script>
+    function handleSupportRequest(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Aquí puedes enviar los datos al servidor o procesarlos
+    console.log('Solicitud de soporte enviada:', { name, email, message });
+
+    // Mostrar un mensaje de confirmación
+    alert('Gracias por contactar con Soporte al Cliente. Responderemos pronto.');
+    
+    // Opcional: Resetear el formulario
+    document.getElementById('supportForm').reset();
+    window.location.href = "PerfilDeUsuario.html";
+    return false;
+
+}
+</script>
+</body>
+</html>

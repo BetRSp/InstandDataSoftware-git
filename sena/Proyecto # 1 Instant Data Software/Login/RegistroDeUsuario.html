@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Data Software - Registro De Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .title {
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .social-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn-social {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+        .btn-google {
+            background-color: #ea4335;
+        }
+        .btn-facebook {
+            background-color: #1877f2;
+        }
+        .error {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+        }
+        .imaglogo {
+width: 160px;
+height: 102px;
+margin: -87px 348px;
+margin-bottom: -17px;
+margin-right: -32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Instant Data Software</h1>
+        <img src="imagesperfil/logoIDS.png" alt="logo" class="imaglogo">
+        <h2>Registro De Usuario</h2>
+        <form id="registroForm" onsubmit="return handleSubmit(event)">
+            <div class="form-group">
+                <label for="nombre">Nombres*</label>
+                <input type="text" id="nombre" required>
+                <div id="nombreError" class="error">Por favor ingrese sus nombres</div>
+            </div>
+            <div class="form-group">
+                <label for="apellidos">Apellidos*</label>
+                <input type="text" id="apellidos" required>
+                <div id="apellidosError" class="error">Por favor ingrese sus apellidos</div>
+            </div>
+            <div class="form-group">
+                <label for="cedula">Cédula*</label>
+                <input type="text" id="cedula" required>
+                <div id="cedulaError" class="error">Ingrese una cédula válida</div>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha De Nacimiento*</label>
+                <input type="date" id="fecha" required>
+                <div id="fechaError" class="error">Ingrese una fecha válida</div>
+            </div>
+        
+            <div class="form-group">
+                <label for="telefono">Teléfono*</label>
+                <input type="tel" id="telefono" required>
+                <div id="telefonoError" class="error">Ingrese un número de teléfono válido</div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail*</label>
+                <input type="email" id="email" required>
+                <div id="emailError" class="error">Ingrese un email válido</div>
+            </div>
+                   
+                    <div>
+                        <label for="newPassword" class="block text-sm font-medium text-gray-700">Ingresar Nueva Contraseña</label>
+                        <input type="password" id="newPassword" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
+                        <input type="password" id="confirmPassword" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    </div>
+            
+        
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="recuerdame"> Recuérdame
+                </label>
+            </div>
+            <button type="submit" class="btn">Registrarse</button>
+            <div class="social-buttons">
+                <button type="button" class="btn-social btn-google" onclick="registroWithGoogle()">
+                    Google
+                </button>
+                <button type="button" class="btn-social btn-facebook" onclick="registroWithFacebook()">
+                    Facebook
+                </button>
+            </div>
+        </form>
+
+    <script>
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validateCedula(cedula) {
+            // Implementar validación específica de cédula según el país
+            return cedula.length >= 8 && cedula.length <= 10 && !isNaN(cedula);
+        }
+
+        function validatePhone(phone) {
+            // Validación básica de teléfono
+            return phone.length >= 8 && !isNaN(phone);
+        }
+
+        function showError(elementId, show) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.style.display = show ? 'block' : 'none';
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const apellidos = document.getElementById('apellidos').value;
+            const cedula = document.getElementById('cedula').value;
+            const fecha = document.getElementById('fecha').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const recuerdame = document.getElementById('recuerdame').checked;
+            
+            // Reset errors
+            const errorFields = ['nombre', 'apellidos', 'cedula', 'fecha', 'telefono', 'email'];
+            errorFields.forEach(field => showError(field + 'Error', false));
+            
+            // Validate fields
+            let isValid = true;
+            
+            if (!nombre) {
+                showError('nombreError', true);
+                isValid = false;
+            }
+            
+            if (!apellidos) {
+                showError('apellidosError', true);
+                isValid = false;
+            }
+
+            if (!validateCedula(cedula)) {
+                showError('cedulaError', true);
+                isValid = false;
+            }
+            
+            if (!fecha) {
+                showError('fechaError', true);
+                isValid = false;
+            }
+            
+            
+            if (!validatePhone(telefono)) {
+                showError('telefonoError', true);
+                isValid = false;
+            }
+            
+            if (!validateEmail(email)) {
+                showError('emailError', true);
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Aquí irían las llamadas a tu API o servicio de registro
+                console.log('Datos del formulario:', {
+                    nombre,
+                    apellidos,
+                    cedula,
+                    fecha,
+                    telefono,
+                    email,
+                    recuerdame
+                });
+                alert('Registro exitoso!');
+                window.location.href = "index.html";
+            }
+            
+            return false;
+        }
+        
+        function registroWithGoogle() {
+            window.location.href = "https://accounts.google.com/signin"; 
+            console.log('Registrando con Google...');
+        }
+
+        function registroWithFacebook() {
+           window.location.href = "https://es-la.facebook.com/login/device-based/regular/login/"
+            console.log('Registrando con Facebook...');
+        }
+ // Cambio de Contraseña
+ window.handlePasswordChange = (event) => {
+        event.preventDefault();
+
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (newPassword !== confirmPassword) {
+            alert('Las contraseñas no coinciden. Por favor, verifica.');
+            return false;
+        }
+
+        // Aquí podrías enviar los datos al servidor para actualizar la contraseña
+        console.log('Contraseña cambiada exitosamente');
+        alert('Tu contraseña ha sido cambiada con éxito');
+        return true;
+    };
+
+    </script>
+</body>
+</html>

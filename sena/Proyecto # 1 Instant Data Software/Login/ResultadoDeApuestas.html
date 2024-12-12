@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial Del Usuario</title>
+    <style>
+          .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e7e3e3d5;
+            color: #0c0e18;
+        }
+
+        .profile-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .avatar {
+    width: 535px;
+    height: 309px;
+    border-radius: 3%;
+    margin-bottom: -18px;
+}
+.imaglogo {
+width: 189px;
+height: 130px;
+margin: -31px ;
+margin-bottom: -9px;
+}
+
+p {
+            color: #1371d1;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+           font-family: Arial, Helvetica, sans-serif;
+        }  
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+           justify-content: center;
+        }
+        .sidebar { /* barra lateral opciones*/ 
+            width: 100px;
+            background: linear-gradient(135deg, #ffffff, #e6f2ff);
+            padding: 40px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            align-content: center;
+        }
+
+
+        h2 {
+            color: #0066cc;
+            text-align: center;
+            font-weight: bold;
+            font-size: 45px;
+           
+        }  
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffffff, #e6f2ff);
+        }
+        .menu-item {/* boton item*/ 
+            padding: 10px;
+            margin-bottom: 26px;
+            cursor: pointer;
+            border-radius: 31px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-size: 17px;
+            width: 100px;
+            height: 50px;
+            font-weight: bold;
+        }
+        .menu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .menu-item.active {
+            background-color: #1a73e8;
+            color: white;
+        }
+        .section { /* contenedor principal*/ 
+            background-color:  #edf1f5;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+      
+    
+        .lottery-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            background: white;
+        }
+        .lottery-btn.active {
+            background-color: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+        .results-table, .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .results-table th, .results-table td,
+        .history-table th, .history-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .results-table th, .history-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .new-bet-form {
+            display: inline;
+            gap: 15px;
+            min-width: 2px;
+        }
+        .form-group {
+    
+            display: flex;
+            flex-direction: column; /* Alinea los elementos verticalmente */
+            gap: 10px; /* Espacio entre cada campo */
+            max-width: 300px; /* Ancho máximo del formulario */
+            margin: 0 auto; /* Centra el contenedor */
+         
+    }
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+        .lottery-selector {
+            display:flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        input:focus, select:focus {
+    border-color: #1a73e8;
+    outline: none; 
+}
+
+        button {/*Estilos de los botones apuestas*/
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+     
+        }
+           
+        button:hover {
+            background-color: #1557b0;
+        }
+
+        .button-container {/* Botan de realizar apuestas */
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
+}
+
+.button-container button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #1557b0;
+}
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+    <html>
+<body>
+  
+    <div class="notification" id="notification"></div>
+    <div class="container">
+        <div class="sidebar">
+            <img src="imagesperfil/logoIDS.png" alt="logo" class="imaglogo">
+            <br>
+            <br>
+            <br>
+            <div class="menu-item" onclick="showSection('historial')">Historial De Apuestas</div>
+            <div class="menu-item" onclick="showSection('resultados')">Resultados De Apuestas</div>
+            <div class="menu-item" onclick="showSection('nueva')">Nuevas Apuestas</div>
+            <div class="menu-item" onclick="Perfil()">Perfil Del Usuario</div>
+
+        </div>
+
+        <div class="main-content">
+            <div id="perfil" class="section active">
+                <h2>Instand Data Software</h2>
+                <div class="profile-card">
+                    <img src="imagesperfil/Bienvenido.jpg" alt="Avatar del Usuario" class="avatar">
+                   
+                    <p id="user-role">!La nueva forma de jugar y llevar el control de tu apuestas¡</p>
+                   
+                </div>
+            </div>
+        
+            <div id="config" class="section" style="display: none;">
+                <h2>Configuración</h2>
+                <p>Aquí puedes modificar tus preferencias.</p>
+            </div>
+        
+            <div id="logout" class="section" style="display: none;">
+                <h2>¿Deseas cerrar sesión?</h2>
+                <button onclick="logout()">Cerrar Sesión</button>
+            </div>
+
+            <div id="resultados" class="section">
+                <h2>Resultados de Apuestas</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Lotería</th>
+                            <th>Número Ganador</th>
+                            <th>Premio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody"></tbody>
+                </table>
+            </div>
+
+            <div id="historial" class="section" style="display: none;">
+                <h2>Historial de Apuestas</h2>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Lotería</th>
+                            <th>Número</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody"></tbody>
+                </table>
+            </div>
+
+            <div id="nueva" class="section" style="display: none;">
+                <h2>Nuevas Apuestas</h2>
+                <form id="newBetForm" class="new-bet-form" onsubmit="return handleNewBet(event)">
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="text" id="betNumber" required maxlength="5">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Valor</label>
+                        <input type="number" id="betAmount" required min="1">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Producto(s)</label>
+                        <input type="number" id="betAmount" required min="1">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Opciones</label>
+                        <input type="number" id="betAmount" required min="1">
+                    </div>
+                    <br>
+                    <div class="lottery-selector">
+                        <button class="lottery-btn active" onclick="selectLottery(1)">Cundinamarca</button>
+                        <button class="lottery-btn" onclick="selectLottery(2)">Tolima</button>
+                        <button class="lottery-btn" onclick="selectLottery(3)">Cruz Roja</button>
+                        <button class="lottery-btn" onclick="selectLottery(4)">Huila</button>
+                        <button class="lottery-btn" onclick="selectLottery(5)">Valle</button>
+                        <button class="lottery-btn" onclick="selectLottery(6)">Manizales</button>
+                        <button class="lottery-btn" onclick="selectLottery(7)">Meta</button>
+                        <button class="lottery-btn" onclick="selectLottery(8)">Bogota</button>
+                        <button class="lottery-btn" onclick="selectLottery(9)">Quindio</button>
+                        <button class="lottery-btn" onclick="selectLottery(10)">Medellin</button>
+                        <button class="lottery-btn" onclick="selectLottery(11)">Risaralda</button>
+                        <button class="lottery-btn" onclick="selectLottery(12)">Santander</button>
+                        <button class="lottery-btn" onclick="selectLottery(13)">Boyaca</button>
+                        <button class="lottery-btn" onclick="selectLottery(14)">Cauca</button>
+                    </div>
+                   
+                    <div class="button-container">
+                        <button type="submit">Realizar Apuesta</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+          // Mostrar una sección y ocultar las demás. perfil del usuario
+          function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+        }
+
+        // Inicializar la página mostrando la sección "Perfil Del Usuario"
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('perfil');
+        });
+
+        function Perfil() {
+            window.location.href = "PerfilDeUsuario.html"; 
+        }
+
+
+        // Estado global de la aplicación
+        let currentLottery = 1;
+        let results = [];
+        let history = [];
+        
+        // Datos de ejemplo
+        const sampleResults = [
+            { fecha: '2024-01-15', loteria: 'Lotería 1', numero: '12345', premio: '$1000' },
+            { fecha: '2024-01-14', loteria: 'Lotería 2', numero: '67890', premio: '$500' }
+        ];
+
+        const sampleHistory = [
+            { fecha: '2024-01-15', loteria: 'Lotería 1', numero: '12345', monto: '$100', estado: 'Ganador' },
+            { fecha: '2024-01-14', loteria: 'Lotería 2', numero: '67890', monto: '$50', estado: 'Pendiente' }
+        ];
+
+        // Funciones de inicialización
+        function init() {
+            results = sampleResults;
+            history = sampleHistory;
+            updateResults();
+            updateHistory();
+        }
+
+        // Función para mostrar notificaciones
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Función para seleccionar lotería
+        function selectLottery(number) {
+            currentLottery = number;
+            document.querySelectorAll('.lottery-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Actualizar datos según la lotería seleccionada
+            updateResults();
+            updateHistory();
+        }
+
+        // Función para cambiar entre secciones
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Función para actualizar resultados
+        function updateResults() {
+            const filteredResults = results.filter(result => 
+                result.loteria === `Lotería ${currentLottery}`
+            );
+            
+            const tbody = document.getElementById('resultsTableBody');
+            tbody.innerHTML = filteredResults.map(result => `
+                <tr>
+                    <td>${result.fecha}</td>
+                    <td>${result.loteria}</td>
+                    <td>${result.numero}</td>
+                    <td>${result.premio}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Función para actualizar historial
+        function updateHistory() {
+            const filteredHistory = history.filter(item => 
+                item.loteria === `Lotería ${currentLottery}`
+            );
+            
+            const tbody = document.getElementById('historyTableBody');
+            tbody.innerHTML = filteredHistory.map(item => `
+                <tr>
+                    <td>${item.fecha}</td>
+                    <td>${item.loteria}</td>
+                    <td>${item.numero}</td>
+                    <td>${item.monto}</td>
+                    <td>${item.estado}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Función para manejar nueva apuesta
+        function handleNewBet(event) {
+            event.preventDefault();
+            
+            const number = document.getElementById('betNumber').value;
+            const amount = document.getElementById('betAmount').value;
+            
+            // Agregar nueva apuesta al historial
+            const newBet = {
+                fecha: new Date().toISOString().split('T')[0],
+                loteria: `Lotería ${currentLottery}`,
+                numero: number,
+                monto: `$${amount}`,
+                estado: 'Pendiente'
+            };
+            
+            history.unshift(newBet);
+            updateHistory();
+            
+            // Limpiar formulario
+            event.target.reset();
+            
+            showNotification('Apuesta realizada con éxito');
+            return false;
+        }
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recarga de Saldo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            font-size: 24px;
+           
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+     
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+        input, select, button {
+            width: 95%;
+            padding: 13px;
+            margin: 4px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: rgb(59 130 246);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Recarga de Saldo</h2>
+        <form id="recargaForm" onsubmit="procesarRecarga(event)">
+            <div class="form-group">
+                <label for="monto">Monto a Recargar:</label>
+                <input type="number" id="monto" min="1000" step="1000" required>
+            </div>
+            <div class="form-group">
+                <label for="metodoPago">Método de Pago:</label>
+                <select id="metodoPago" required>
+                    <option value="tarjeta">Tarjeta de Crédito/Débito</option>
+                    <option value="transferencia">Transferencia Bancaria</option>
+                    <option value="bancolombia">Bancolombia</option>
+                    <option value="nequi">Nequi</option>
+                    <option value="pse">Pse</option>
+                    <option value="paypal">PayPal</option>
+
+                </select>
+            </div>
+            <button type="submit">Recargar</button>
+        </form>
+        <div id="mensaje"></div>
+    </div>
+    <script> 
+// Archivo: recarga.js
+
+function procesarRecarga(event) {
+    event.preventDefault(); // Evita el envío del formulario
+
+    const monto = document.getElementById('monto').value;
+    const metodoPago = document.getElementById('metodoPago').value;
+
+    if (monto && metodoPago) {
+        document.getElementById('mensaje').innerHTML = `
+            <p>Procesando tu recarga de <strong>$${monto}</strong> usando <strong>${metodoPago}</strong>.</p>
+            <p>Por favor, espera...</p>
+        `;
+        setTimeout(() => {
+            document.getElementById('mensaje').innerHTML = `
+                <p style="color: green;">¡Recarga exitosa! Tu saldo ha sido actualizado.</p>
+            `;
+        }, 3000); // Simula el tiempo de procesamiento
+    }
+}
+    </script>
+</body>
+</html>
