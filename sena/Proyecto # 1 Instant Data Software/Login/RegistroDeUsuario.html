@@ -103,12 +103,12 @@ margin-right: -32px;
                 <input type="text" id="cedula" required>
                 <div id="cedulaError" class="error">Ingrese una cédula válida</div>
             </div>
-            <div class="form-group">
-                <label for="fecha">Fecha De Nacimiento*</label>
-                <input type="date" id="fecha" required>
-                <div id="fechaError" class="error">Ingrese una fecha válida</div>
+            <div class="form-group"> 
+                <label for="fechaNacimiento">Fecha De Nacimiento*</label>
+                <input type="date" id="fechaNacimiento" required>
+                <div id="fechaNacimientoError" class="error">Ingrese una fecha válida</div>
             </div>
-        
+            
             <div class="form-group">
                 <label for="telefono">Teléfono*</label>
                 <input type="tel" id="telefono" required>
@@ -168,72 +168,60 @@ margin-right: -32px;
         }
 
         function handleSubmit(event) {
-            event.preventDefault();
-            
-            const nombre = document.getElementById('nombre').value;
-            const apellidos = document.getElementById('apellidos').value;
-            const cedula = document.getElementById('cedula').value;
-            const fecha = document.getElementById('fecha').value;
-            const telefono = document.getElementById('telefono').value;
-            const email = document.getElementById('email').value;
-            const recuerdame = document.getElementById('recuerdame').checked;
-            
-            // Reset errors
-            const errorFields = ['nombre', 'apellidos', 'cedula', 'fecha', 'telefono', 'email'];
-            errorFields.forEach(field => showError(field + 'Error', false));
-            
-            // Validate fields
-            let isValid = true;
-            
-            if (!nombre) {
-                showError('nombreError', true);
-                isValid = false;
-            }
-            
-            if (!apellidos) {
-                showError('apellidosError', true);
-                isValid = false;
-            }
+    event.preventDefault();
 
-            if (!validateCedula(cedula)) {
-                showError('cedulaError', true);
-                isValid = false;
-            }
-            
-            if (!fecha) {
-                showError('fechaError', true);
-                isValid = false;
-            }
-            
-            
-            if (!validatePhone(telefono)) {
-                showError('telefonoError', true);
-                isValid = false;
-            }
-            
-            if (!validateEmail(email)) {
-                showError('emailError', true);
-                isValid = false;
-            }
+    const nombre = document.getElementById('nombre').value;
+    const apellidos = document.getElementById('apellidos').value;
+    const cedula = document.getElementById('cedula').value;
+    const fechaNacimiento = document.getElementById('fechaNacimiento').value; // Extrae el valor directamente
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('email').value;
+    const contrasena = document.getElementById('newPassword').value;
 
-            if (isValid) {
-                // Aquí irían las llamadas a tu API o servicio de registro
-                console.log('Datos del formulario:', {
-                    nombre,
-                    apellidos,
-                    cedula,
-                    fecha,
-                    telefono,
-                    email,
-                    recuerdame
-                });
-                alert('Registro exitoso!');
-                window.location.href = "index.html";
+    // Verifica si la fecha está en el formato correcto
+    if (!fechaNacimiento || !/^\d{4}-\d{2}-\d{2}$/.test(fechaNacimiento)) {
+        document.getElementById('fechaNacimientoError').style.display = 'block';
+        return false;
+    } else {
+        document.getElementById('fechaNacimientoError').style.display = 'none';
+    }
+
+    // Crea el objeto de usuario con los datos
+    const userData = {
+        nombre,
+        apellidos,
+        cedula,
+        fechaNacimiento, 
+        telefono,
+        email,
+        contrasena,
+    };
+
+    // Realiza la solicitud al servidor
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Error al registrar el usuario');
             }
-            
-            return false;
-        }
-        
+            return response.json();
+        })
+        .then((message) => {
+            alert(message.message || 'Registro exitoso');
+            window.location.href = 'index.html';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Hubo un problema con el registro');
+        });
+}
+
+
         function registroWithGoogle() {
             window.location.href = "https://accounts.google.com/signin"; 
             console.log('Registrando con Google...');
@@ -261,6 +249,7 @@ margin-right: -32px;
         alert('Tu contraseña ha sido cambiada con éxito');
         return true;
     };
+
 
     </script>
 </body>
